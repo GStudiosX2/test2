@@ -84,12 +84,7 @@ function Video:IsStopped(): boolean
 end
 
 function Video:AddFrame(frame: string): boolean
-  if not self:IsStopped() then
-    return false
-  end
-
-  table.insert(self._frames, frame)
-  return true
+  return self:InsertFrame(frame, #self._frames)
 end
 
 function Video:RemoveFrame(frame: number): boolean
@@ -107,6 +102,9 @@ function Video:InsertFrame(frame: string, idx: number): boolean
   end
 
   table.insert(self._frames, idx, frame)
+  --if self._image.get_source() ~= self:GetFrame() and #self._frames == 1 then
+  --  self._image.set_source(self:GetFrame())
+  --end
   return true
 end
 
